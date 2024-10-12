@@ -32,7 +32,11 @@ export default {
         function showTel(){
             alert(tel)
         }
+
+        // 将数据、方法交出去，模版中才可以使用
         return {name, age, changeName, changeAge, showTel}
+        // setup 的返回值也可以是一个渲染函数
+        // return ()=> '哈哈'
     }
 }
 </script>

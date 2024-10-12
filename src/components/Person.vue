@@ -12,23 +12,27 @@
 
 export default {
     name: 'Person',
-    data(){
-        return {
-            name: 'Zhang San',
-            age: 18,
-            tel: '1388888888'
+    setup(){
+        // vue3 中弱化 this，setup 函数中 this 是 undefined
+
+        // data，此时的数据都是非响应式的数据
+        let name = '张三'
+        let age = 18
+        let tel = '1388888888'
+
+        // methods
+        function changeName(){
+            // console.log(1)
+            name = 'Lex Chen'
         }
-    },
-    methods:{
-        changeName(){
-            this.name = 'Lex Chen'
-        },
-        changeAge(){
-            this.age += 1
-        },
-        showTel(){
-            alert(this.tel)
+        function changeAge(){
+            // console.log(2)
+            age += 1
         }
+        function showTel(){
+            alert(tel)
+        }
+        return {name, age, changeName, changeAge, showTel}
     }
 }
 </script>

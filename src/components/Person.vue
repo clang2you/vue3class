@@ -1,39 +1,57 @@
 <template>
   <div class="person">
-    <h1>情况二:监视【ref】定义的【对象类型】数据</h1>
+    <h1>情况三:监视【reactive】定义的【对象类型】数据</h1>
     <h2>姓名：{{ person.name }}</h2>
     <h2>年龄：{{ person.age }}</h2>
     <button @click="changeName">修改名字</button>
     <button @click="changeAge">修改年龄</button>
     <button @click="changePerson">修改整个人</button>
+    <hr>
+    <h2>测试：{{ obj.a.b.c }}</h2>
+    <button @click="test">修改 obj.a.b.c</button>
   </div>
 </template>
 
 <script lang="ts" setup name="Person">
-  import { ref, watch } from 'vue'
+  import { reactive, watch } from 'vue'
   //data
-  let person = ref({
+  let person = reactive({
     name: '张三',
     age: 18
   })
+
+  let obj = reactive({
+    a: {
+      b: {
+        c: 666
+      }
+    }
+  })
   //methods
   function changeName() {
-    person.value.name += '~'
+    person.name += '~'
   }
   function changeAge() {
-    person.value.age += 1
+    person.age += 1
   }
   function changePerson() {
-    person.value = { name: '李四', age: 20 }
+    Object.assign(person, { name: '李四', age: 90 })
   }
+  function test() {
+    obj.a.b.c = 888
+  }
+
   /*
-  watch 的第一个参数是：被监视的数据
-  watch 的第二个参数是：监视的回调
-  watch 的第三个参数是：配置对象（deep，immediate....)
+  watch，情况三，监视【reactive】定义的【对象类型】数据，默认开启深度监视且无法关闭
+  官方文档：如果坚实的是一个 reactive 对象，底层就已经隐式的创建了深层监听
   */
-  watch(person, (newValue, oldValue)=>{
-    console.log('person发生变化', newValue, oldValue)
-  }, {deep:true, immediate: true})
+  watch(person, (newValue, oldValue) => {
+    console.log('person变化了', newValue, oldValue)
+  })
+
+  watch(obj, (newValue, oldValue) => {
+    console.log('obj发生变化了', newValue, oldValue)
+  },{deep: true})
 </script>
 
 <style scoped>

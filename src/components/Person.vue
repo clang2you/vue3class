@@ -1,29 +1,40 @@
 <template>
   <div class="person">
-    <h2>姓名:{{ name }}</h2>
-    <h2>年龄:{{ age }}, {{ nl }}</h2>
-    <button @click="changeName">修改名字</button>
-    <button @click="changeAge">修改年龄</button>
+    姓：<input type="text" v-model="firstName"><br>
+    名：<input type="text" v-model="lastName"><br>
+    全名：<span>{{ fullName }}</span>
+    <button @click="changeFullname">李-四</button>
   </div>
 </template>
 
 <script lang="ts" setup name="Person">
-import { reactive, toRefs, toRef } from 'vue';
-let person = reactive({
-  name: '张三',
-  age: 18
+import { ref, computed } from 'vue';
+
+let firstName = ref('张')
+let lastName = ref('三')
+
+// 以下定义的 fullname 是一个计算属性，且是只读的不可修改
+// let fullName = computed(() => {
+//   return firstName.value + '-' + lastName.value
+// })
+
+// 以下定义的 fullname 是一个计算属性且可读可写
+let fullName = computed({
+  get(){
+    return firstName.value + '-' + lastName.value
+  },
+  set(val){
+    const [str1, str2] = val.split('-')
+    firstName.value = str1
+    lastName.value = str2
+    console.log('set', val)
+  }
 })
 
-let { name, age } = toRefs(person)
-let nl = toRef(person, 'age')
-console.log(nl.value)
+function changeFullname(){
+  fullName.value = '李-四'
+}
 
-function changeName() {
-  name.value += '~'
-}
-function changeAge() {
-  age.value += 1
-}
 </script>
 
 <style scoped>

@@ -1,31 +1,39 @@
 <template>
   <div class="person">
-    <h1>情况一：监视【ref】定义的【基本类型】数据</h1>
-    <h2>当前求和为：{{ sum }}</h2>
-    <button @click="changeSum">求和自增1</button>
+    <h1>情况二:监视【ref】定义的【对象类型】数据</h1>
+    <h2>姓名：{{ person.name }}</h2>
+    <h2>年龄：{{ person.age }}</h2>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="changePerson">修改整个人</button>
   </div>
 </template>
 
 <script lang="ts" setup name="Person">
   import { ref, watch } from 'vue'
-
-  // data
-  let sum = ref(0)
-
-  // methods
-  function changeSum(){
-    sum.value += 1
-  }
-
-  // watch
-  // 情况一：监视【ref】定义的【基本类型】数据
-  // watch 的返回值是一个停止 watch 的函数，所以以下 stopWatch() 被执行后 watch 就停止了
-  const stopWatch = watch(sum, (newValue, oldValue)=> {
-    console.log('sum 变化了', newValue, oldValue)
-    if ( newValue >= 10){
-      stopWatch()
-    }
+  //data
+  let person = ref({
+    name: '张三',
+    age: 18
   })
+  //methods
+  function changeName() {
+    person.value.name += '~'
+  }
+  function changeAge() {
+    person.value.age += 1
+  }
+  function changePerson() {
+    person.value = { name: '李四', age: 20 }
+  }
+  /*
+  watch 的第一个参数是：被监视的数据
+  watch 的第二个参数是：监视的回调
+  watch 的第三个参数是：配置对象（deep，immediate....)
+  */
+  watch(person, (newValue, oldValue)=>{
+    console.log('person发生变化', newValue, oldValue)
+  }, {deep:true, immediate: true})
 </script>
 
 <style scoped>

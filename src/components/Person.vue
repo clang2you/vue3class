@@ -1,43 +1,24 @@
 <template>
   <div class="person">
-    <h2>需求：当水温达到60℃，或水位达到80cm时，给服务器发个请求</h2>
-    <h2>当前水温：{{ temp }}℃</h2>
-    <h2>当前水位：{{ height }}cm</h2>
-    <button @click="changeTemp">水温+10</button>
-    <button @click="changeHeight">水位+1</button>
+    <h1>中国</h1>
+    <h2 ref="title2">北京</h2>
+    <!-- 可以用在普通 DOM 标签上，获取的是 DOM 节点
+    用在组件标签上，获取的是组件实例对象 -->
+    <h3>尚硅谷</h3>
+    <button @click="showLog">点我输出h2这个元素</button>
   </div>
 </template>
 
 <script lang="ts" setup name="Person">
-  import { ref, watch, watchEffect } from 'vue'
 
-  // data
-  let temp = ref(10)
-  let height = ref(0)
+  import { ref } from 'vue'
 
-  // methods
-  function changeTemp() {
-    temp.value += 10
+  // create data
+  let title2 = ref()
+
+  function showLog() {
+    console.log(title2.value)
   }
-
-  function changeHeight() {
-    height.value += 10
-  }
-
-  // watch 实现
-  // watch([temp, height], (value) => {
-  //   let [newTemp, newHeight] = value
-  //   if (newTemp >= 60 || newHeight >= 80) {
-  //     console.log("给服务器发请求")
-  //   }
-  // })
-
-  // watch effect
-  watchEffect(() => {
-    if (temp.value >= 60 || height.value >= 80) {
-      console.log("给服务器发请求")
-    }
-  })
 </script>
 
 <style scoped>

@@ -1,24 +1,14 @@
 <template>
-    <!-- <div class="app">
-        <h1>你好啊！</h1>
-    </div> -->
-    <Person/>
+  <h2 ref="title2">Hello</h2>
+  <button @click="showLog">点我输出h2</button><hr>
+  <Person />
 </template>
 
-<script lang="ts">
+<script lang="ts" setup name="App">
   import Person from './components/Person.vue';
-
-  export default {
-    name: 'App', // component name
-    components: {Person} // register component
+  import { ref } from 'vue'
+  let title2 = ref()
+  function showLog(){
+    console.log(title2.value)
   }
 </script>
-
-<!-- <style>
-  .app{
-    background-color: #ddd;
-    box-shadow: 0 0 10px;
-    border-radius: 10px;
-    padding: 20px;
-  }
-</style> -->

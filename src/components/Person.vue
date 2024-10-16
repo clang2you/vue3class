@@ -1,24 +1,20 @@
 <template>
   <div class="person">
-    <h1>中国</h1>
-    <h2 ref="title2">北京</h2>
-    <!-- 可以用在普通 DOM 标签上，获取的是 DOM 节点
-    用在组件标签上，获取的是组件实例对象 -->
-    <h3>尚硅谷</h3>
-    <button @click="showLog">点我输出h2这个元素</button>
+    ???
   </div>
 </template>
 
 <script lang="ts" setup name="Person">
+  import { type PersonInter, type Persons } from '@/types'
 
-  import { ref } from 'vue'
+  // let person: PersonInter = { id: 'asyund7asfd01', name: '张三', age: 60 }
 
-  // create data
-  let title2 = ref()
+  let personList: Persons = [
+    { id: 'asyund7asfd01', name: '张三', age: 60 },
+    { id: 'asyund7asfd02', name: '李四', age: 18 },
+    { id: 'asyund7asfd03', name: '王老五', age: 5 }
+  ]
 
-  function showLog() {
-    console.log(title2.value)
-  }
 </script>
 
 <style scoped>

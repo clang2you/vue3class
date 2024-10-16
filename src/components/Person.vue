@@ -1,19 +1,28 @@
 <template>
   <div class="person">
-    ???
+    <ul>
+      <li v-for="personObj in list" :key="personObj.id">
+        {{ personObj.name }} -- {{ personObj.age }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts" setup name="Person">
-  import { type PersonInter, type Persons } from '@/types'
+  import { withDefaults } from 'vue'
+  import { type Persons } from '@/types'
 
-  // let person: PersonInter = { id: 'asyund7asfd01', name: '张三', age: 60 }
+  // defineProps(['list'])
 
-  let personList: Persons = [
-    { id: 'asyund7asfd01', name: '张三', age: 60 },
-    { id: 'asyund7asfd02', name: '李四', age: 18 },
-    { id: 'asyund7asfd03', name: '王老五', age: 5 }
-  ]
+  // 接收 list + 限制类型
+  // defineProps<{list: Persons}>()
+
+  // 接收 list + 限制类型 + 限制必要性 + 指定默认值
+  withDefaults(defineProps<{ list?: Persons }>(), {
+    list: () => [{ id: 'ausydgyu01', name: '康师傅.王麻子.特仑苏', age: 19 }]
+  })
+  /* let x = defineProps(['list'])
+  console.log(x) */
 
 </script>
 

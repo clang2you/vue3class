@@ -4,8 +4,10 @@
     <!-- <h2 class="title">Vue 路由测试</h2> -->
     <!-- 导航区 -->
     <div class="navigate">
+      <!-- 字符串写法 -->
       <RouterLink to="/home" active-class="active">首页</RouterLink>
-      <RouterLink to="/news" active-class="active">新闻</RouterLink>
+      <!-- 对象写法 -->
+      <RouterLink :to="{name:'xinwen'}" active-class="active">新闻</RouterLink>
       <RouterLink :to="{path:'/about'}" active-class="active">关于</RouterLink>
     </div>
     <!-- 展示区 -->

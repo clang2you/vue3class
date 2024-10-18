@@ -25,7 +25,8 @@ const router = createRouter({
             children: [
                 {
                     name: 'xiang',
-                    path: 'detail',
+                    // params 传参要先占位
+                    path: 'detail/:id/:title/:content?',
                     component: Detail
                 }
             ]

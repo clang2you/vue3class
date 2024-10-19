@@ -6,6 +6,7 @@
                 <!-- 第一种写法 -->
                 <!-- <RouterLink :to="`/news/detail/${news.id}/${news.title}/${news.content}`">{{ news.title }}</RouterLink> -->
                 <!-- 第二种写法 -->
+                <button @click="showNewsDetail(news)">查看新闻</button>
                 <RouterLink :to="{
                     // 只能使用 name，不能使用 path
                     name: 'xiang',
@@ -28,7 +29,7 @@
 
 <script setup lang="ts" name="News">
     import { reactive } from 'vue';
-    import { RouterLink, RouterView } from 'vue-router';
+    import { RouterLink, RouterView, useRouter } from 'vue-router';
 
     // data
     const newsList = reactive([
@@ -37,6 +38,25 @@
         { id: '003', title: '震惊，万万没想到', content: '明天是周一' },
         { id: '004', title: '好消息！好消息！', content: '快过年了' }
     ])
+
+    const router = useRouter()
+
+    interface NewsInter {
+        id: string,
+        title: string,
+        content: string
+    }
+
+    function showNewsDetail(news: NewsInter) {
+        router.push({
+            name: "xiang",
+            params: {
+                id: news.id,
+                title: news.title,
+                content: news.content
+            }
+        })
+    }
 </script>
 
 <style scoped>

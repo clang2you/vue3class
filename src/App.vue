@@ -1,14 +1,14 @@
 <template>
   <div class="app">
-    <Header/>
+    <Header />
     <!-- <h2 class="title">Vue 路由测试</h2> -->
     <!-- 导航区 -->
     <div class="navigate">
       <!-- 字符串写法 -->
-      <RouterLink replace to="/home" active-class="active">首页</RouterLink>
+      <RouterLink to="/home" active-class="active">首页</RouterLink>
       <!-- 对象写法 -->
-      <RouterLink replace :to="{name:'xinwen'}" active-class="active">新闻</RouterLink>
-      <RouterLink replace :to="{path:'/about'}" active-class="active">关于</RouterLink>
+      <RouterLink :to="{ name: 'xinwen' }" active-class="active">新闻</RouterLink>
+      <RouterLink :to="{ path: '/about' }" active-class="active">关于</RouterLink>
     </div>
     <!-- 展示区 -->
     <div class="main-content">

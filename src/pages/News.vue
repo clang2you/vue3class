@@ -14,7 +14,9 @@
                         title: news.title,
                         content: news.content
                     }
-                }">{{ news.title }}</RouterLink>
+                }">
+                    {{ news.title }}
+                </RouterLink>
             </li>
         </ul>
         <!-- 展示区 -->

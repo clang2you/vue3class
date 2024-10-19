@@ -27,7 +27,21 @@ const router = createRouter({
                     name: 'xiang',
                     // params 传参要先占位
                     path: 'detail/:id/:title/:content?',
-                    component: Detail
+                    component: Detail,
+                    // 第一种写法：将路由收到的所有params参数作为props传给路由组件
+                    // props: true
+
+                    // 第二种写法:函数写法，可以自己决定将什么作为props传给路由组件
+                    props(route) {
+                        return route.params
+                    }
+
+                    // 第三种写法：对象写法，可以自己决定将什么作为props传给路由组件
+                    /* props:{
+                        a:100,
+                        b:200,
+                        c:300
+                    } */
                 }
             ]
         },

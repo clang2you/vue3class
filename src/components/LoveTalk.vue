@@ -2,22 +2,17 @@
     <div class="talk">
         <button @click="getLoveTalk">获取一句土味情话</button>
         <ul>
-            <li v-for="talk in talkStore.talkList" :key="talk.id">{{ talk.title }}</li>
+            <li v-for="talk in talkList" :key="talk.id">{{ talk.title }}</li>
         </ul>
     </div>
 </template>
 
 <script setup lang="ts" name="LoveTalk">
-    import axios from "axios";
     import { useTalkStore } from "@/store/talk";
-    import { nanoid } from "nanoid";
+import { storeToRefs } from "pinia";
 
     const talkStore = useTalkStore()
-
-    interface objInter {
-        id: string,
-        title: string
-    }
+    const {talkList} = storeToRefs(talkStore)
 
     // methods
     function getLoveTalk(){

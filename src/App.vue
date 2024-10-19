@@ -5,10 +5,10 @@
     <!-- 导航区 -->
     <div class="navigate">
       <!-- 字符串写法 -->
-      <RouterLink to="/home" active-class="active">首页</RouterLink>
+      <RouterLink replace to="/home" active-class="active">首页</RouterLink>
       <!-- 对象写法 -->
-      <RouterLink :to="{name:'xinwen'}" active-class="active">新闻</RouterLink>
-      <RouterLink :to="{path:'/about'}" active-class="active">关于</RouterLink>
+      <RouterLink replace :to="{name:'xinwen'}" active-class="active">新闻</RouterLink>
+      <RouterLink replace :to="{path:'/about'}" active-class="active">关于</RouterLink>
     </div>
     <!-- 展示区 -->
     <div class="main-content">

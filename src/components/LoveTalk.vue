@@ -14,6 +14,10 @@ import { storeToRefs } from "pinia";
     const talkStore = useTalkStore()
     const {talkList} = storeToRefs(talkStore)
 
+    talkStore.$subscribe(()=>{
+        localStorage.setItem('talkList', JSON.stringify(talkList.value))
+    })
+
     // methods
     function getLoveTalk(){
         talkStore.getATalk()

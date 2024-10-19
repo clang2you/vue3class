@@ -13,6 +13,7 @@
 
 <script setup lang="ts" name="Count">
     import { ref } from 'vue';
+    import {useCountStore} from '@/store/count'
 
     // data
     let sum = ref(1) // 当前求和

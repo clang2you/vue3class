@@ -1,6 +1,6 @@
 <template>
     <div class="count">
-        <h2>当前求和为：{{ sum }}</h2>
+        <h2>当前求和为：{{ sum }}, 放大10倍后：{{ bigSum }}</h2>
         <select v-model.number="n">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -20,7 +20,7 @@
     let n = ref(1) // 用户选择的数字
 
     const countStore = useCountStore()
-    const {sum} = storeToRefs(countStore)
+    const {sum, bigSum} = storeToRefs(countStore)
 
     function add() {
         countStore.increment(n.value)

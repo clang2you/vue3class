@@ -19,29 +19,8 @@
     let n = ref(1) // 用户选择的数字
 
     const countStore = useCountStore()
-    // 以下两种方式都可以拿到 state 中的数据
-    // console.log(countStore.sum);
-    // console.log(countStore.$state.sum);
-
-    /* let obj = reactive({
-        a: 1,
-        b: 2,
-        c: ref(3)
-    })
-    console.log(obj.a);
-    console.log(obj.b);
-    console.log(obj.c); */
 
     function add() {
-        // 第一种修改方式
-        // countStore.sum += n.value
-
-        // 第二种修改方式
-        // countStore.$patch({
-        //     sum: 888
-        // })
-
-        // 第三种修改方式
         countStore.increment(n.value)
     }
 

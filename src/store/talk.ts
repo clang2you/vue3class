@@ -2,7 +2,7 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 import { defineStore } from "pinia";
 
-export const useTalkStore = defineStore('talk', {
+/* export const useTalkStore = defineStore('talk', {
     actions: {
         async getATalk() {
             let { data: { content: title } } = await axios.get('https://api.uomg.com/api/rand.qinghua?format=json')
@@ -21,4 +21,18 @@ export const useTalkStore = defineStore('talk', {
             talkList:JSON.parse(localStorage.getItem('talkList') as string) || []
         }
     }
+}) */
+
+import { reactive } from 'vue'
+export const useTalkStore = defineStore('talk', () => {
+    const talkList = reactive(
+        JSON.parse(localStorage.getItem('talkList') as string)||[]
+    )
+
+    async function getATalk() {
+        let { data: { content: title } } = await axios.get('https://api.uomg.com/api/rand.qinghua?format=json')
+        let obj = { id: nanoid(), title }
+        talkList.unshift(obj)
+    }
+    return {talkList, getATalk}
 })

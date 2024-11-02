@@ -1,51 +1,53 @@
 <template>
     <div class="app">
-        <h2>当前sum1为：{{ sum1 }}</h2>
-        <h2>当前sum2为：{{ sum2 }}</h2>
-        <h2>当前car1为:{{ car1 }}</h2>
-        <h2>当前car2为:{{ car2 }}</h2>
-        <button @click="changeSum1">点我 sum1 + 1</button>
-        <button @click="changeSum2">点我 sum2 + 1</button>
-        <button @click="changeBrand1">修改品牌</button>
-        <button @click="changeColor1">修改颜色</button>
-        <button @click="changePrice1">修改价格</button>
+        <h2>姓名：{{ person2.name }}</h2>
+        <h2>年龄:{{ person2.age }}</h2>
+        <button @click="person.age += 1">修改年龄</button>
+        <hr>
+        <h2>{{ car2 }}</h2>
+        <button @click="car2.price += 10">点我价格+10</button>
     </div>
 </template>
 
 <script setup lang="ts" name="App">
-    import { reactive, readonly, ref, shallowReadonly } from 'vue';
+    import { markRaw, reactive, toRaw } from 'vue';
+    import mockjs from 'mockjs'
 
-    let sum1 = ref(0)
-    let sum2 = readonly(sum1)
-
-    let car1 = reactive({
-        brand: 'Benz',
-        options: {
-            color: 'red',
-            price: 100
-        }
+    let person = reactive({
+        name: 'tony',
+        age: 18
     })
 
-    let car2 = shallowReadonly(car1)
+    /*
+    toRaw:
+    在需要将响应式对象传递给非 Vue 的库或外部系统时，使用 toRaw 可以确保他们收到的是普通对象
+    */
+    let person2 = toRaw(person)
 
-    function changeSum1() {
-        sum1.value += 1
-    }
-    function changeSum2() {
-        sum2.value += 1
+    /* 
+    markRaw:
+    标记一个对象，使其永远不会变成响应式的
+    */
+
+    let car = markRaw({ brand: 'Benz', price: 100 })
+    car.price += 1
+    car.price += 1
+    car.price += 1
+
+    let car2 = reactive(car)
+
+    console.log(car);
+    console.log(car2);
+
+    let mockJs = markRaw(mockjs)
+    console.log(mockJs);
+
+    function showPerson(p: any) {
+        p.age += 10
+        p.name += '~'
+        console.log(p);
     }
 
-    function changeBrand1() {
-        car1.brand = 'Audi'
-    }
-
-    function changeColor1() {
-        car1.options.color = 'Blue'
-    }
-
-    function changePrice1() {
-        car1.options.price += 10
-    }
 </script>
 
 <style scoped>

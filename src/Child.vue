@@ -1,17 +1,18 @@
 <template>
     <div class="child">
-        <h2>我是 Child 组件</h2>
+        <h2>我是 Child 组件 {{ x }}</h2>
         <h3>当前求和为：{{ sum }}</h3>
+        <h4 v-beauty="sum">好开心</h4>
+        <Hello />
     </div>
 </template>
 
 <script setup lang="ts" name="Child">
-    import axios from 'axios';
+
     import { ref } from 'vue';
 
     let sum = ref(0)
-    let { data: { content } } = await axios.get('https://api.uomg.com/api/rand.qinghua?format=json')
-    console.log(content)
+
 </script>
 
 <style scoped>
